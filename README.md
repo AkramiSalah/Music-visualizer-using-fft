@@ -1,3 +1,13 @@
+## Description
+
+This project implements a recursive Fast Fourier Transform (FFT) algorithm, which processes audio data to extract frequency components and visualize them in real-time. The program captures audio from an input file, applies the FFT to analyze the signal's frequency domain, and then displays a graphical representation of the audio's frequency components.
+
+You can use this program to load audio files (only .ogg right now), apply the FFT algorithm to decompose the signal into its frequency components, and see a visualization of how the frequency content evolves over time. This is useful for tasks like audio analysis, music visualization, and exploring signal processing techniques.
+
+The FFT algorithm used is based on the recursive divide-and-conquer approach described in the Introduction to Algorithms (CLRS) book, which helps in understanding the underlying mechanics of the FFT algorithm. This implementation focuses on both accuracy and educational value, allowing users to gain insight into how FFT works in practice.
+
+![Alt Text](https://i.makeagif.com/media/11-18-2024/knE5RM.gif)
+
 ## How to Use This
 
 Open the main.code-workspace file by double-clicking on it. This will open the project in Visual Studio Code.
