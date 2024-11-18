@@ -1,29 +1,20 @@
-# Raylib-CPP-Starter-Template-for-VSCODE-V2
-Raylib C++ Starter Template for Visual Studio Code on Windows.
-This demo project contains a bouncing ball raylib example program.
-It works with raylib version 5.0. Tested on both Windows 10 and Windows 11.
+## How to Use This
 
-# How to use this template
-1. Double click on the main.code-workspace file. This will open the template in VS Code.
-2. From the Explorer Window of VS Code navigate to the src folder and double click on the main.cpp file.
-3. Press F5 on the keyboard to compile and run the program.
+Open the main.code-workspace file by double-clicking on it. This will open the project in Visual Studio Code.
+In the Explorer panel of VS Code, navigate to the src folder and double-click on the main.cpp file to open it.
+Use the terminal to navigate to the project directory, then run make to build the project by pressing F5.
 
-# What's changed
-The template now uses folders for better organizion of the files. So, all the source code now lives in the src folder.
+## Dependencies
 
-# Video Tutorial
+Raylib: Used for audio processing and visualization. You can download Raylib from here. Make sure to link Raylib correctly in the Makefile.
+MinGW: If you're on Windows, MinGW is required for compiling. Ensure MinGW is installed and properly configured.
+CMake: Used for project configuration and building. You can use CMake to generate the Makefile.
+Make: A tool for building projects using a Makefile. If you're on Windows, ensure you have a working version of make installed (e.g., via MSYS2 or MinGW).
 
-<p align="center">
-  <img src="preview.jpg" alt="" width="800">
-</p>
+## Inspiration
 
-<p align="center">
-🎥 <a href="https://www.youtube.com/watch?v=PaAcVk5jUd8">Video Tutorial on YouTube</a>
-</p>
+I was inspired by tsoding's video, where I noticed that his understanding of FFT wasn't complete. So, I turned to the famous Introduction to Algorithms (CLRS) book and after researching, reading, and watching various resources, I came up with a recursive FFT algorithm as described in CLRS.
 
-<br>
-<br>
-<p align="center">
-| 📺 <a href="https://www.youtube.com/channel/UC3ivOTE5EgpmF2DHLBmWIWg">My YouTube Channel</a>
-| 🌍 <a href="http://www.educ8s.tv">My Website</a> | <br>
-</p>
+## License
+
+This project has no specific license. You can use it however you like, though it would be appreciated if you gave me credit :)
