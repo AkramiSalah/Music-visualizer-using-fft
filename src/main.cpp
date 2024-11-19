@@ -135,8 +135,7 @@ int main(void)
             auto fft_result = FFT(input);
 
             size_t half_size = FFT_SIZE / 2;
-            // float bar_width = static_cast<float>(GetScreenWidth()) / half_size;
-            float bar_width = static_cast<float>(GetScreenWidth()) / half_size; // Add a gap
+            float bar_width = static_cast<float>(GetScreenWidth()) / half_size;
 
             float local_max_magnitude = 0.0f;
             for (size_t i = 0; i < half_size; i++)
