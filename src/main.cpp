@@ -98,7 +98,7 @@ inline float CalculateBarHeight(float magnitude, float max_magnitude, float heig
 
 int main(void)
 {
-    const char *audioFilePath = "./res/Running.ogg"; // Path to the target audio file
+    const char *audioFilePath = "./res/arub.ogg"; // Path to the target audio file
 
     InitWindow(1280, 800, "Music Visualizer with FFT");
     SetTargetFPS(165);
@@ -129,13 +129,14 @@ int main(void)
             std::vector<std::complex<float>> input(FFT_SIZE);
             for (size_t i = 0; i < FFT_SIZE; i++)
             {
-                input[i] = std::complex<float>(global_frames[i].left, 0.0f); // Use left channel only for now.
+                input[i] = std::complex<float>((global_frames[i].left + global_frames[i].right) / 2.0f, 0.0f);
             }
 
             auto fft_result = FFT(input);
 
             size_t half_size = FFT_SIZE / 2;
-            float bar_width = static_cast<float>(GetScreenWidth()) / half_size;
+            // float bar_width = static_cast<float>(GetScreenWidth()) / half_size;
+            float bar_width = static_cast<float>(GetScreenWidth()) / half_size; // Add a gap
 
             float local_max_magnitude = 0.0f;
             for (size_t i = 0; i < half_size; i++)
@@ -150,10 +151,7 @@ int main(void)
             for (size_t i = 0; i < half_size; i++)
             {
                 float magnitude = std::abs(fft_result[i]);
-
-                // Calculate the bar height using dynamic and logarithmic scaling
                 float bar_height = CalculateBarHeight(magnitude, max_magnitude, height);
-
                 Color bar_color = GetFrequencyColor(i, FFT_SIZE);
 
                 DrawRectangle(i * bar_width, GetScreenHeight() - bar_height, bar_width, bar_height, bar_color);
@@ -162,6 +160,10 @@ int main(void)
 
         EndDrawing();
     }
+
+    UnloadMusicStream(music);
+    CloseAudioDevice();
+    CloseWindow();
 
     return 0;
 }
