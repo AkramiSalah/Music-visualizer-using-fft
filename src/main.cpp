@@ -17,7 +17,7 @@ typedef struct
 std::vector<Frame> global_frames(FFT_SIZE);
 size_t global_frames_count = 0;
 
-std::vector<std::complex<float>> IFFT(const std::vector<std::complex<float>> &frames)
+std::vector<std::complex<float>> FFT(const std::vector<std::complex<float>> &frames)
 {
     size_t N = frames.size();
     if (N == 1)
@@ -31,17 +31,20 @@ std::vector<std::complex<float>> IFFT(const std::vector<std::complex<float>> &fr
         odd[k] = frames[k * 2 + 1];
     }
 
-    auto Ye = IFFT(even);
-    auto Yo = IFFT(odd);
+    auto Ye = FFT(even);
+    auto Yo = FFT(odd);
 
-    std::complex<float> wk = 1.0f;
-    std::complex<float> wn = std::polar(1.0f, -2.0f * PI / N);
+    float angle = -2.0f * PI / static_cast<float>(N);
+
+    std::complex<float> wk(1.0f, 0.0f);
+    std::complex<float> wn(cos(angle), sin(angle));
 
     std::vector<std::complex<float>> Y(N);
     for (size_t j = 0; j < N2; j++)
     {
-        Y[j] = Ye[j] + wk * Yo[j];
-        Y[j + N2] = Ye[j] - wk * Yo[j];
+        std::complex<float> odd_term = wk * Yo[j];
+        Y[j] = Ye[j] + odd_term;
+        Y[j + N2] = Ye[j] - odd_term;
         wk *= wn;
     }
 
@@ -95,7 +98,7 @@ inline float CalculateBarHeight(float magnitude, float max_magnitude, float heig
 
 int main(void)
 {
-    const char *audioFilePath = "./res/arub.ogg"; // Path to the target audio file
+    const char *audioFilePath = "./res/Running.ogg"; // Path to the target audio file
 
     InitWindow(1280, 800, "Music Visualizer with FFT");
     SetTargetFPS(165);
@@ -129,7 +132,7 @@ int main(void)
                 input[i] = std::complex<float>(global_frames[i].left, 0.0f); // Use left channel only for now.
             }
 
-            auto fft_result = IFFT(input);
+            auto fft_result = FFT(input);
 
             size_t half_size = FFT_SIZE / 2;
             float bar_width = static_cast<float>(GetScreenWidth()) / half_size;
